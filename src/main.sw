@@ -32,9 +32,8 @@ use std::{
 use ::interface::{HotelBooking, Info};
 
 storage {
-    ///Owner
 
-    booking_history: StorageMap<(Identity, BookingInfo), Booking> = StorageMap {},
+    booking_history: StorageMap<(Identity, u64), u64> = StorageMap {},
 
     property_availability: StorageMap<(u64, u64, u64), bool> = StorageMap {},
 
@@ -109,7 +108,7 @@ impl HotelBooking for Contract {
 
         storage.total_booking.write(storage.total_booking.read() + 1);
         storage.booking_info.insert(storage.total_booking.read(), booking_info);
-        storage.booking_history.insert((bookedBy, booking_info), Booking::new(storage.total_booking.read()));
+        storage.booking_history.insert((bookedBy, property_id), storage.total_booking.read());
         storage.property_availability.insert((property_id, bookingFrom, bookingTo), false);
 
         //Mark property as booked
@@ -133,10 +132,10 @@ impl HotelBooking for Contract {
 
         // Use the user's pledges as an ID / way to index this new sign
         let bookedBy = msg_sender().unwrap();
-        let booking_history = storage.booking_history.get((bookedBy, booking_info)).try_read().unwrap_or(0);
+        let booking_history = storage.booking_history.get((bookedBy, booking_info.property_id)).try_read().unwrap_or(0);
         let property_available = storage.property_availability.get((booking_info.property_id, newBookingFrom, newBookingTo)).try_read().unwrap_or(true);
 
-        require(booking_history != 0, BookingError::BookingNotFound);
+        require(booking_history == booking_id, BookingError::BookingNotFound);
         require(booking_info.status != BookingState::Cancelled, BookingError::AlreadyCancelled);
         require(property_available != false, BookingError::PropertyNotAvailable);
 

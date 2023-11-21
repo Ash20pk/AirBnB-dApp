@@ -12,8 +12,7 @@ pub struct PropertyInfo {
     ///Listed or not
     listed: PropertyState,
     ///Availability
-    available: BookingState,
-    
+    available: BookingState,    
 }
 
 impl PropertyInfo {

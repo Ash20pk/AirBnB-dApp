@@ -11,6 +11,7 @@ use ::data_structures::{
     booking_state::BookingState,
     booking_info::BookingInfo,
     property_state::PropertyState,
+    property_image::PropertyImage,
     booking::Booking,
 };
 use ::errors::{BookingError, CreationError, UserError};
@@ -40,6 +41,8 @@ storage {
 
     property_info: StorageMap<u64, PropertyInfo> = StorageMap {},
 
+    property_images: StorageMap<u64, PropertyImage> = StorageMap {},
+
     booking_info: StorageMap<u64, BookingInfo> = StorageMap {},
 
 
@@ -51,16 +54,20 @@ storage {
 impl HotelBooking for Contract {
 
     #[storage(read, write)]
-    fn list_property(pincode: u8) {
+    fn list_property(pincode: u8, image1: b256, image2: b256) {
         let owner = msg_sender().unwrap();
 
         // Create an internal representation of a campaign
         let property_info = PropertyInfo::new(owner, pincode);
+        let property_images = PropertyImage::new(image1, image2);
 
         // We've just created a new campaign so increment the number of created campaigns across all
         // users and store the new campaign
         storage.total_property_listed.write(storage.total_property_listed.read() + 1);
         storage.property_info.insert(storage.total_property_listed.read(), property_info);
+        
+        // Store the image references
+        storage.property_images.insert(storage.total_property_listed.read(), property_images);
 
         // We have changed the state by adding a new data structure therefore we log it
         log(PropertyListed {
@@ -183,9 +190,13 @@ impl Info for Contract {
     }
 
     #[storage(read)]
-
     fn property_info(property_id: u64) -> Option<PropertyInfo> {
         storage.property_info.get(property_id).try_read()
+    }
+    
+    #[storage(read)]
+    fn get_property_images(property_id: u64) -> Option<PropertyImage> {
+        storage.property_images.get(property_id).try_read()
     }
 
     #[storage(read)]

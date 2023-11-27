@@ -5,10 +5,10 @@ use ::data_structures::booking_state::BookingState;
 
 
 pub struct PropertyInfo {
-    /// The user who has created the campaign
+    /// The user who has listed the Property
     owner: Identity,
     ///Pincode of the property
-    pincode: u8,
+    pincode: u64,
     ///Listed or not
     listed: PropertyState,
     ///Availability
@@ -19,7 +19,7 @@ impl PropertyInfo {
 
     pub fn new(
         owner: Identity,
-        pincode: u8,
+        pincode: u64,
     ) -> Self {
         Self {
             owner,

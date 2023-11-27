@@ -9,19 +9,13 @@ use ::data_structures::{
 abi HotelBooking {
     
     #[storage(read, write)]
-    fn list_property(pincode: u8,image1: b256, image2: b256);
+    fn list_property(pincode: u64,image1: b256, image2: b256);
    
     #[storage(read, write)]
     fn unlist_property(property_id: u64);
-   
-    #[storage(read, write)]
-    fn book(property_id: u64, bookingFrom: u64, bookingTo: u64);
-    
-    #[storage(read, write)]
-    fn change_date(booking_id: u64, newBookingFrom: u64, newBookingTo: u64);
 
     #[storage(read, write)]
-    fn cancel_booking(booking_id: u64);
+    fn book(property_id: u64, bookingFrom: u64, bookingTo: u64);
 }
 
 abi Info {

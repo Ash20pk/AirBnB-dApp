@@ -2,11 +2,11 @@ library;
 
 use core::ops::Eq;
 
-/// Represents the current state of the campaign.
+/// Represents the current state of the Booking.
 pub enum BookingState {
-    /// The campaign has been cancelled.
+
     Available: (),
-    /// The campain was successful
+
     Booked: (),
 
     Cancelled: (),

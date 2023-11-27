@@ -1,0 +1,42 @@
+/* NavigationBar.css */
+
+/* Navigation bar container */
+.navbar {
+    background-color: #C53AAE; /* Background color */
+  }
+  
+  /* Connect/Disconnect button styling */
+  .connect-button,
+  .disconnect-button {
+    font-weight: bold;
+    color: #fff; /* Text color */
+    border: 1px solid;
+    border-color: #000000;
+  }
+  
+  /* Disconnect button styling */
+  .disconnect-button {
+    background-color: #000000; /* Red color for disconnect button */
+    border: 1px solid;
+    border-color: #fff;
+  }
+  
+  /* Logo styling */
+  .logo {
+    font-weight: bold;
+    color: #fff; /* Text color */
+  }
+  
+  /* Navigation links styling */
+  .nav-link {
+    font-weight: bold;
+    margin-left: 20px; /* Add spacing between links */
+    text-decoration: none;
+    color: #fff; /* Text color */
+  }
+  
+  /* Add hover effect to links */
+  .nav-link:hover {
+    text-decoration: underline;
+  }
+  

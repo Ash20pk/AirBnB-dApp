@@ -7,6 +7,7 @@ import './style/ListProperty.css';
 
 
 const CONTRACT_ID = process.env.REACT_APP_CONTRACT_ID;
+
 console.log(CONTRACT_ID);
 
 interface ListPropertyProps {
@@ -57,8 +58,8 @@ const ListProperty: React.FC<ListPropertyProps> = ({ account }) => {
             method: "post",
             data: formData,
             headers: {
-                'pinata_api_key': 'd1142b635c7d76135866',
-                'pinata_secret_api_key': '8dcde5998daa70f74397623aa43ff9875f943856c31d7508ee6e0bb432464efb',
+                'pinata_api_key': process.env.REACT_APP_PINATA_API_KEY,
+                'pinata_secret_api_key': process.env.REACT_APP_PINATA_SECRET_API_KEY,
                 "Content-Type": "multipart/form-data"
             },
             });

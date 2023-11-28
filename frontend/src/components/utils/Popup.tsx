@@ -14,13 +14,13 @@ const Popup: React.FC<Props> = ({ show, title, content, onClose }) => {
   }
 
   return (
-    <div className="modal" onClick={onClose}>
-      <div className="modal-content" onClick={e => e.stopPropagation()}>
-        <div className="modal-header">
-          <h4 className="modal-title">{title}</h4>
+    <div className="popup" onClick={onClose}>
+      <div className="popup-content" onClick={e => e.stopPropagation()}>
+        <div className="popup-header">
+          <h4 className="popup-title">{title}</h4>
         </div>
-        <div className="modal-body">{content}</div>
-        <div className="modal-footer">
+        <div className="popup-body">{content}</div>
+        <div className="popup-footer">
           <button onClick={onClose}>Close</button>
         </div>
       </div>

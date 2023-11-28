@@ -110,7 +110,7 @@ const ListProperty: React.FC<ListPropertyProps> = ({ account }) => {
 
 return (
     <div className="form-container">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className='form'>
         <input
           type="text"
           name="pincode"
@@ -121,14 +121,14 @@ return (
         />
         <input
           type="file"
-          name="image1"
+          name="Property Image 1"
           className="file-input"
           onChange={handleInputChange}
           required
         />
         <input
           type="file"
-          name="image2"
+          name="Property Image 2"
           className="file-input"
           onChange={handleInputChange}
           required
@@ -147,7 +147,7 @@ return (
         content={<pre>{modalContent}</pre>}
         onClose={() => setShowModal(false)}
       />
-    </div>
+      </div>
   );
 };
 

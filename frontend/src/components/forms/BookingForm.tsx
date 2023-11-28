@@ -59,7 +59,6 @@ const BookingForm: React.FC<BookingFormProps> = ({account}) => {
                 </>
             ) : (
                 <>
-                    <h2>Book Property</h2>
                     <form onSubmit={handleSubmit}>
                         <div>
                             <label>From</label>

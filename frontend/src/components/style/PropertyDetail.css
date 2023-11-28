@@ -4,7 +4,6 @@
 .property-detail-container {
     background: #f5f5f5;
     padding: 20px;
-    font-family: 'Arial', sans-serif;
     line-height:25px;
     text-align: center;
   }
@@ -82,37 +81,19 @@
   
   /* Booking Button */
   .book-button {
-    margin-top: 15px;
-    background-color: #C53AAE;
-    color: #fff;
-    padding: 12px 24px;
+    margin: 10px;
+    padding: 10px;
+    font-size: 15px;
     border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 18px;
-    transition: background-color 0.3s ease;
+    border-radius: 8px;
+    background: #C53AAE;
+    color: white;
+    font-weight: bold;
+    transition: filter 0.15s ease-in-out;
   }
   
   .book-button:hover {
     background-color: #a02e8d;
-  }
-  
-  /* Modal */
-  .modal-content {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  }
-  
-  .modal-header,
-  .modal-footer {
-    margin-bottom: 20px;
-  }
-  
-  .modal-title {
-    font-size: 22px;
-    color: #333;
   }
   
   /* Responsive Design */

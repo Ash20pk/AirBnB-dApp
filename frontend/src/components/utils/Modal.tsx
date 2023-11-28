@@ -18,11 +18,9 @@ const Modal: React.FC<Props> = ({ show, title, content, onClose }) => {
       <div className="modal-content" onClick={e => e.stopPropagation()}>
         <div className="modal-header">
           <h4 className="modal-title">{title}</h4>
+          <button className="close-button" onClick={onClose}>X</button>
         </div>
         <div className="modal-body">{content}</div>
-        <div className="modal-footer">
-          <button onClick={onClose}>Close</button>
-        </div>
       </div>
     </div>
   );

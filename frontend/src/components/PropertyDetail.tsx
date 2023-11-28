@@ -115,11 +115,7 @@ const PropertyDetail: React.FC<PropertyDetailProps> = ({ account }) => {
                     <p className="property-info">Pincode: {property.pincode}</p>
                     <p className="property-info">Listed: {property.listed}</p>
                     <p className="property-info">Availability: {property.available}</p>
-                    {property.available === 'Booked' ? (
-                        <button className="book-button" disabled>Not Available</button>
-                    ) : (
-                        <button className="book-button" onClick={handleOpenBookingModal}>Book</button>
-                    )}
+                    <button className="book-button" onClick={handleOpenBookingModal}>Book</button>
                   </div>
         
                   <div className="modal-container">

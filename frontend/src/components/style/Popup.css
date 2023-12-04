@@ -21,9 +21,13 @@
   max-width: 600px; /* Maximum width for larger screens */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   animation: popupFadeIn 0.3s;
-  text-align: left; /* Left-align the entire content */
   width: 90%; /* Adjusted width for responsiveness */
   max-width: 400px; /* Adjusted max-width for smaller screens */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 /* popup header */
@@ -47,10 +51,15 @@
 /* popup body */
 .popup-body {
   padding: 1rem 0;
-  font-size: 18px;
+  font-size: 15px;
   color: #333;
   line-height: 1.5;
-  text-align: left; /* Left-align the content */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
 }
 
 /* popup footer */

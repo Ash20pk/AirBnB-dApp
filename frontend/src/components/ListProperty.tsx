@@ -69,16 +69,27 @@ const ListProperty: React.FC<ListPropertyProps> = ({ account }) => {
     };
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-        if (e.target.type === "file" && e.target.files) {
-            setPropertyDetails({ ...propertyDetails, [e.target.name]: e.target.files[0] });
+        if (e.target.type === "file") {
+            const files = e.target.files;
+            if (files && files.length > 0) {
+                setPropertyDetails((prevDetails) => ({
+                    ...prevDetails,
+                    [e.target.name]: files[0],
+                }));
+            }
         } else {
             setPropertyDetails({ ...propertyDetails, [e.target.name]: e.target.value });
         }
     };
+    
+    
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setIsSubmitting(true);
+
+        console.log('Image 1:', propertyDetails.image1);
+        console.log('Image 2:', propertyDetails.image2);
 
         try {
             if (propertyDetails.image1 && propertyDetails.image2) {
@@ -121,14 +132,14 @@ return (
         />
         <input
           type="file"
-          name="Property Image 1"
+          name="image1"
           className="file-input"
           onChange={handleInputChange}
           required
         />
         <input
           type="file"
-          name="Property Image 2"
+          name="image2"
           className="file-input"
           onChange={handleInputChange}
           required

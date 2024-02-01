@@ -1,4 +1,5 @@
 import bs58 from 'bs58';
+import { Buffer } from 'buffer';
 import { BN, Provider, fromTai64ToUnix } from 'fuels';
 
 export function base58ToHex(base58String: string): string {

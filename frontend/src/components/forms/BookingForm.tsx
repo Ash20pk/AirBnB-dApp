@@ -45,7 +45,7 @@ const BookingForm: React.FC<BookingFormProps> = ({account}) => {
             const bookingTo = await convertToTimestamp(bookingDates.bookingTo);
             console.log(bookingFrom, bookingTo);
             console.log()
-            const { logs } = await contract.functions.book(id, bookingFrom, bookingTo).txParams({gasPrice:1}).call();
+            const { logs } = await contract.functions.book(id, bookingFrom, bookingTo).txParams({gasPrice:1, gasLimit: 100_000}).call();
             console.log(logs[0].booking_id.toString()); 
             setBookingSuccess(true);
             setBookingId(logs[0].booking_id.toString());

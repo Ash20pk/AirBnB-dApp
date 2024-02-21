@@ -27,7 +27,7 @@ const PropertyList: React.FC<PropertyListProp> = ({account}) => {
             try {
                 if (isConnected && wallet && CONTRACT_ID && CONTRACT_ID) {
                     const contract = AirbnbContractAbi__factory.connect(CONTRACT_ID, wallet);
-                    const {value} = await contract.functions.total_property_listed().txParams({gasPrice:1}).call();
+                    const {value} = await contract.functions.total_property_listed().txParams({gasPrice:1, gasLimit: 100_000}).call();
                     setPropertyCount(value.toNumber());
                     console.log(value.toNumber());
                 }

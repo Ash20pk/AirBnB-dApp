@@ -110,7 +110,7 @@ const ListProperty: React.FC<ListPropertyProps> = ({ account }) => {
                 console.log(image1Hex, image2Hex);
             if (isConnected && wallet && CONTRACT_ID) {
                 const contract = AirbnbContractAbi__factory.connect(CONTRACT_ID, wallet);
-                const {logs} = await contract.functions.list_property(propertyDetails.pincode,image1Hex,image2Hex).txParams({gasPrice:1}).call()
+                const {logs} = await contract.functions.list_property(propertyDetails.pincode,image1Hex,image2Hex).txParams({gasPrice:1, gasLimit: 100_000}).call()
                 setIsSubmitting(false);
                 console.log(logs[0]);
                 displayModal("Property Listed Successfully", `

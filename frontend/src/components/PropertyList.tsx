@@ -2,6 +2,11 @@ import { useEffect, useState } from 'react';
 import { AirbnbContractAbi__factory } from '../contracts';
 import { Link } from 'react-router-dom';
 import './style/PropertyList.css';
+import {
+    useConnectUI,
+    useIsConnected,
+    useWallet,
+  } from '@fuel-wallet/react';
 
 const CONTRACT_ID = process.env.REACT_APP_CONTRACT_ID;
 
@@ -12,12 +17,15 @@ interface PropertyListProp {
 const PropertyList: React.FC<PropertyListProp> = ({account}) => {
     const [propertyCount, setPropertyCount] = useState<number>(0);
     const [loading, setLoading] = useState(true);
+    const { connect, setTheme, isConnecting } =
+    useConnectUI();
+    const { isConnected } = useIsConnected();
+    const { wallet } = useWallet();
 
     useEffect(() => {
         const fetchProperties = async () => {
             try {
-                if (window.fuel && CONTRACT_ID) {
-                    const wallet = await window.fuel.getWallet(account);
+                if (isConnected && wallet && CONTRACT_ID && CONTRACT_ID) {
                     const contract = AirbnbContractAbi__factory.connect(CONTRACT_ID, wallet);
                     const {value} = await contract.functions.total_property_listed().txParams({gasPrice:1}).call();
                     setPropertyCount(value.toNumber());

@@ -5,20 +5,35 @@ import PropertyDetail from './components/PropertyDetail';
 import ListProperty from './components/ListProperty';
 import NavigationBar from './components/NavigationBar';
 import { Container, Typography } from '@mui/material';
+import {
+    useConnectUI,
+    useIsConnected,
+    useWallet,
+    useFuel
+  } from '@fuel-wallet/react';
+
 
 const App: React.FC = () => {
   const [connected, setConnected] = useState(false);
   const [account, setAccount] = useState("");
+  const { connect, setTheme, isConnecting } =
+    useConnectUI();
+    const { isConnected } = useIsConnected();
+    const { wallet } = useWallet();
+    const { fuel } = useFuel();
+
  
   const connectWallet = async () => {
-    if (window.fuel) {
+    connect();
+    if (isConnected && wallet) {
         try {
-            await window.fuel.connect();
-            const accounts = await window.fuel.accounts();
-            if (accounts.length === 0) {
+            const accounts = await fuel.currentAccount();
+            if(accounts){
+            if (accounts.length === 0 ) {
                 throw new Error('No accounts found.');
             }
-            setAccount(accounts[0]);
+            setAccount(accounts);
+        }
             setConnected(true);
         } catch (err) {
             console.error('error connecting: ', err);

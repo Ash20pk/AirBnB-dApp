@@ -4,9 +4,9 @@
 /* eslint-disable */
 
 /*
-  Fuels version: 0.65.0
-  Forc version: 0.46.1
-  Fuel-Core version: 0.20.8
+  Fuels version: 0.74.0
+  Forc version: 0.50.0
+  Fuel-Core version: 0.22.1
 */
 
 export type { AirbnbContractAbi } from './AirbnbContractAbi';

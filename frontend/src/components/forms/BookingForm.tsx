@@ -2,6 +2,11 @@ import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { AirbnbContractAbi__factory } from '../../contracts';
 import { convertToTimestamp } from '../utils/Convert'
+import {
+    useConnectUI,
+    useIsConnected,
+    useWallet,
+  } from '@fuel-wallet/react';
 
 interface BookingFormProps {
     account: string; 
@@ -17,6 +22,10 @@ const BookingForm: React.FC<BookingFormProps> = ({account}) => {
     const [bookingSuccess, setBookingSuccess] = useState(false);
     const [bookingId, setBookingId] = useState(0);
     const { id } = useParams<{ id: string }>();
+    const { connect, setTheme, isConnecting } =
+    useConnectUI();
+    const { isConnected } = useIsConnected();
+    const { wallet } = useWallet();
 
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -29,9 +38,8 @@ const BookingForm: React.FC<BookingFormProps> = ({account}) => {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         console.log(id);
-        if (window.fuel && id !== undefined && CONTRACT_ID !== undefined) {
+        if (isConnected && wallet && id !== undefined && CONTRACT_ID !== undefined) {
             
-            const wallet = await window.fuel.getWallet(account);
             const contract = AirbnbContractAbi__factory.connect(CONTRACT_ID, wallet);
             const bookingFrom = await convertToTimestamp(bookingDates.bookingFrom);
             const bookingTo = await convertToTimestamp(bookingDates.bookingTo);

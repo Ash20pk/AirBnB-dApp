@@ -11,6 +11,11 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
+import {
+  useConnectUI,
+  useIsConnected,
+  useWallet,
+} from '@fuel-wallet/react';
 
 
 const CONTRACT_ID = process.env.REACT_APP_CONTRACT_ID;
@@ -32,6 +37,10 @@ const PropertyDetail: React.FC<PropertyDetailProps> = ({ account }) => {
     const [property, setProperty] = useState<PropertyInfo | null>(null);
     const [showBookingModal, setShowBookingModal] = useState(false);
     const { id } = useParams<{ id: string }>();
+    const { connect, setTheme, isConnecting } =
+    useConnectUI();
+    const { isConnected } = useIsConnected();
+    const { wallet } = useWallet();
 
     const handleOpenBookingModal = () => setShowBookingModal(true);
     const handleCloseBookingModal = () => setShowBookingModal(false);
@@ -56,9 +65,8 @@ const PropertyDetail: React.FC<PropertyDetailProps> = ({ account }) => {
     }, [id, account]);
 
     const fetchProperty = async () => {
-            if (window.fuel && id !== undefined && CONTRACT_ID) {
+            if (isConnected && wallet && CONTRACT_ID && id !== undefined && CONTRACT_ID) {
                 try {
-                    const wallet = await window.fuel.getWallet(account);
                     const contract = AirbnbContractAbi__factory.connect(CONTRACT_ID, wallet);
                     const { value } = await contract
                     .multiCall([

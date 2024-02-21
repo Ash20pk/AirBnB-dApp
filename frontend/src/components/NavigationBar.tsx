@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './style/NavigationBar.css'; // Make sure this path is correct
 
+
 interface NavigationBarProps {
     connected: boolean;
     onConnect: () => Promise<void>;

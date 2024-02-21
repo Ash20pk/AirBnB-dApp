@@ -4,6 +4,11 @@ import { AirbnbContractAbi__factory } from '../contracts';
 import { base58ToHex} from './utils/Convert'
 import Popup from './utils/Popup';
 import './style/ListProperty.css';
+import {
+    useConnectUI,
+    useIsConnected,
+    useWallet,
+  } from '@fuel-wallet/react';
 
 
 const CONTRACT_ID = process.env.REACT_APP_CONTRACT_ID;
@@ -24,6 +29,10 @@ const ListProperty: React.FC<ListPropertyProps> = ({ account }) => {
         image2: null
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const { connect, setTheme, isConnecting } =
+    useConnectUI();
+    const { isConnected } = useIsConnected();
+    const { wallet } = useWallet();
 
     const displayModal = (title: string, content: string) => {
         setModalTitle(title);
@@ -99,8 +108,7 @@ const ListProperty: React.FC<ListPropertyProps> = ({ account }) => {
                 const image2Hex = await convertToB256(image2Cid);
                 console.log(image1Cid, image2Cid);
                 console.log(image1Hex, image2Hex);
-            if (window.fuel && CONTRACT_ID) {
-                const wallet = await window.fuel.getWallet(account);
+            if (isConnected && wallet && CONTRACT_ID) {
                 const contract = AirbnbContractAbi__factory.connect(CONTRACT_ID, wallet);
                 const {logs} = await contract.functions.list_property(propertyDetails.pincode,image1Hex,image2Hex).txParams({gasPrice:1}).call()
                 setIsSubmitting(false);

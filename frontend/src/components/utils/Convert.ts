@@ -14,7 +14,7 @@ export function hexToBase58(hexString: string): string {
 
 export async function convertToTimestamp(date: string) {
     const dateData = new Date(date);
-    const provider = await Provider.create('https://beta-4.fuel.network/graphql');
+    const provider = await Provider.create('https://beta-5.fuel.network/graphql');
     const block = await provider.getBlock('latest');
     if (block) {
     console.log(fromTai64ToUnix(block.time));

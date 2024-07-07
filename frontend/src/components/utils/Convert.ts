@@ -1,6 +1,6 @@
 import bs58 from 'bs58';
 import { Buffer } from 'buffer';
-import { BN, Provider, fromTai64ToUnix } from 'fuels';
+import { BN } from 'fuels';
 
 export function base58ToHex(base58String: string): string {
     const bytes = bs58.decode(base58String);
@@ -14,11 +14,6 @@ export function hexToBase58(hexString: string): string {
 
 export async function convertToTimestamp(date: string) {
     const dateData = new Date(date);
-    const provider = await Provider.create('https://beta-5.fuel.network/graphql');
-    const block = await provider.getBlock('latest');
-    if (block) {
-    console.log(fromTai64ToUnix(block.time));
-    }
 
     return Math.floor((dateData.getTime())/1000);
   }

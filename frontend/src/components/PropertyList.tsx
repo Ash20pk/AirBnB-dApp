@@ -6,7 +6,7 @@ import {
     useConnectUI,
     useIsConnected,
     useWallet,
-  } from '@fuel-wallet/react';
+  } from '@fuels/react';
 
 const CONTRACT_ID = process.env.REACT_APP_CONTRACT_ID;
 
@@ -17,7 +17,7 @@ interface PropertyListProp {
 const PropertyList: React.FC<PropertyListProp> = ({account}) => {
     const [propertyCount, setPropertyCount] = useState<number>(0);
     const [loading, setLoading] = useState(true);
-    const { connect, setTheme, isConnecting } =
+    const { connect, isConnecting } =
     useConnectUI();
     const { isConnected } = useIsConnected();
     const { wallet } = useWallet();
@@ -27,7 +27,7 @@ const PropertyList: React.FC<PropertyListProp> = ({account}) => {
             try {
                 if (isConnected && wallet && CONTRACT_ID && CONTRACT_ID) {
                     const contract = AirbnbContractAbi__factory.connect(CONTRACT_ID, wallet);
-                    const {value} = await contract.functions.total_property_listed().txParams({gasPrice:1, gasLimit: 100_000}).call();
+                    const {value} = await contract.functions.total_property_listed().call();
                     setPropertyCount(value.toNumber());
                     console.log(value.toNumber());
                 }

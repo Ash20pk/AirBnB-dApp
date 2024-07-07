@@ -10,13 +10,13 @@ import {
     useIsConnected,
     useWallet,
     useFuel
-  } from '@fuel-wallet/react';
+  } from '@fuels/react';
 
 
 const App: React.FC = () => {
   const [connected, setConnected] = useState(false);
   const [account, setAccount] = useState("");
-  const { connect, setTheme, isConnecting } =
+  const { connect, isConnecting } =
     useConnectUI();
     const { isConnected } = useIsConnected();
     const { wallet } = useWallet();

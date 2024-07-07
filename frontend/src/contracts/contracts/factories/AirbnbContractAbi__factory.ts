@@ -4,9 +4,9 @@
 /* eslint-disable */
 
 /*
-  Fuels version: 0.73.0
-  Forc version: 0.49.2
-  Fuel-Core version: 0.22.0
+  Fuels version: 0.89.2
+  Forc version: 0.60.0
+  Fuel-Core version: 0.27.0
 */
 
 import { Interface, Contract, ContractFactory } from "fuels";
@@ -14,6 +14,7 @@ import type { Provider, Account, AbstractAddress, BytesLike, DeployContractOptio
 import type { AirbnbContractAbi, AirbnbContractAbiInterface } from "../AirbnbContractAbi";
 
 const _abi = {
+  "encoding": "1",
   "types": [
     {
       "typeId": 0,
@@ -174,7 +175,7 @@ const _abi = {
       "type": "struct Address",
       "components": [
         {
-          "name": "value",
+          "name": "bits",
           "type": 1,
           "typeArguments": null
         }
@@ -245,7 +246,7 @@ const _abi = {
       "type": "struct ContractId",
       "components": [
         {
-          "name": "value",
+          "name": "bits",
           "type": 1,
           "typeArguments": null
         }
@@ -554,7 +555,7 @@ const _abi = {
   ],
   "loggedTypes": [
     {
-      "logId": 0,
+      "logId": "13390072562516710654",
       "loggedType": {
         "name": "",
         "type": 4,
@@ -562,15 +563,7 @@ const _abi = {
       }
     },
     {
-      "logId": 1,
-      "loggedType": {
-        "name": "",
-        "type": 4,
-        "typeArguments": []
-      }
-    },
-    {
-      "logId": 2,
+      "logId": "14316281739756857108",
       "loggedType": {
         "name": "",
         "type": 2,
@@ -578,7 +571,7 @@ const _abi = {
       }
     },
     {
-      "logId": 3,
+      "logId": "8742946235045228304",
       "loggedType": {
         "name": "",
         "type": 8,
@@ -586,7 +579,7 @@ const _abi = {
       }
     },
     {
-      "logId": 4,
+      "logId": "10932599476737129033",
       "loggedType": {
         "name": "",
         "type": 12,
@@ -594,7 +587,7 @@ const _abi = {
       }
     },
     {
-      "logId": 5,
+      "logId": "9745559268152217383",
       "loggedType": {
         "name": "",
         "type": 16,
@@ -602,15 +595,7 @@ const _abi = {
       }
     },
     {
-      "logId": 6,
-      "loggedType": {
-        "name": "",
-        "type": 8,
-        "typeArguments": []
-      }
-    },
-    {
-      "logId": 7,
+      "logId": "8286637757495051045",
       "loggedType": {
         "name": "",
         "type": 17,
@@ -624,42 +609,40 @@ const _abi = {
 
 const _storageSlots: StorageSlot[] = [
   {
-    "key": "7f91d1a929dce734e7f930bbb279ccfccdb5474227502ea8845815c74bd930a7",
+    "key": "5e3ff3f51d5ca549ca1a17248cec142d92079f7ee4b619ed31e405e031561f51",
     "value": "0000000000000000000000000000000000000000000000000000000000000000"
   },
   {
-    "key": "94b2b70d20da552763c7614981b2a4d984380d7ed4e54c01b28c914e79e44bd5",
+    "key": "d0871278b5d10fb0390d22992791927f5da5a77acb4a1fcb90b6cecbd07a46f4",
     "value": "0000000000000000000000000000000000000000000000000000000000000000"
   }
 ];
 
-export class AirbnbContractAbi__factory {
-  static readonly abi = _abi;
+export const AirbnbContractAbi__factory = {
+  abi: _abi,
 
-  static readonly storageSlots = _storageSlots;
+  storageSlots: _storageSlots,
 
-  static createInterface(): AirbnbContractAbiInterface {
+  createInterface(): AirbnbContractAbiInterface {
     return new Interface(_abi) as unknown as AirbnbContractAbiInterface
-  }
+  },
 
-  static connect(
+  connect(
     id: string | AbstractAddress,
     accountOrProvider: Account | Provider
   ): AirbnbContractAbi {
     return new Contract(id, _abi, accountOrProvider) as unknown as AirbnbContractAbi
-  }
+  },
 
-  static async deployContract(
+  async deployContract(
     bytecode: BytesLike,
     wallet: Account,
     options: DeployContractOptions = {}
   ): Promise<AirbnbContractAbi> {
     const factory = new ContractFactory(bytecode, _abi, wallet);
 
-    const { storageSlots } = AirbnbContractAbi__factory;
-
     const contract = await factory.deployContract({
-      storageSlots,
+      storageSlots: _storageSlots,
       ...options,
     });
 

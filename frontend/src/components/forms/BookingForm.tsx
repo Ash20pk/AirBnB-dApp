@@ -6,7 +6,7 @@ import {
     useConnectUI,
     useIsConnected,
     useWallet,
-  } from '@fuel-wallet/react';
+  } from '@fuels/react';
 
 interface BookingFormProps {
     account: string; 
@@ -22,7 +22,7 @@ const BookingForm: React.FC<BookingFormProps> = ({account}) => {
     const [bookingSuccess, setBookingSuccess] = useState(false);
     const [bookingId, setBookingId] = useState(0);
     const { id } = useParams<{ id: string }>();
-    const { connect, setTheme, isConnecting } =
+    const { connect, isConnecting } =
     useConnectUI();
     const { isConnected } = useIsConnected();
     const { wallet } = useWallet();
@@ -45,7 +45,7 @@ const BookingForm: React.FC<BookingFormProps> = ({account}) => {
             const bookingTo = await convertToTimestamp(bookingDates.bookingTo);
             console.log(bookingFrom, bookingTo);
             console.log()
-            const { logs } = await contract.functions.book(id, bookingFrom, bookingTo).txParams({gasPrice:1, gasLimit: 100_000}).call();
+            const { logs } = await contract.functions.book(id, bookingFrom, bookingTo).call();
             console.log(logs[0].booking_id.toString()); 
             setBookingSuccess(true);
             setBookingId(logs[0].booking_id.toString());

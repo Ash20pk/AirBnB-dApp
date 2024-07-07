@@ -8,7 +8,7 @@ import {
     useConnectUI,
     useIsConnected,
     useWallet,
-  } from '@fuel-wallet/react';
+  } from '@fuels/react';
 
 
 const CONTRACT_ID = process.env.REACT_APP_CONTRACT_ID;
@@ -29,7 +29,7 @@ const ListProperty: React.FC<ListPropertyProps> = ({ account }) => {
         image2: null
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const { connect, setTheme, isConnecting } =
+    const { connect, isConnecting } =
     useConnectUI();
     const { isConnected } = useIsConnected();
     const { wallet } = useWallet();
@@ -110,7 +110,7 @@ const ListProperty: React.FC<ListPropertyProps> = ({ account }) => {
                 console.log(image1Hex, image2Hex);
             if (isConnected && wallet && CONTRACT_ID) {
                 const contract = AirbnbContractAbi__factory.connect(CONTRACT_ID, wallet);
-                const {logs} = await contract.functions.list_property(propertyDetails.pincode,image1Hex,image2Hex).txParams({gasPrice:10, gasLimit: 100_0000}).call()
+                const {logs} = await contract.functions.list_property(propertyDetails.pincode,image1Hex,image2Hex).call()
                 setIsSubmitting(false);
                 console.log(logs[0]);
                 displayModal("Property Listed Successfully", `

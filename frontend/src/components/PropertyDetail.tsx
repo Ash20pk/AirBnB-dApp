@@ -15,7 +15,7 @@ import {
   useConnectUI,
   useIsConnected,
   useWallet,
-} from '@fuel-wallet/react';
+} from '@fuels/react';
 
 
 const CONTRACT_ID = process.env.REACT_APP_CONTRACT_ID;
@@ -37,7 +37,7 @@ const PropertyDetail: React.FC<PropertyDetailProps> = ({ account }) => {
     const [property, setProperty] = useState<PropertyInfo | null>(null);
     const [showBookingModal, setShowBookingModal] = useState(false);
     const { id } = useParams<{ id: string }>();
-    const { connect, setTheme, isConnecting } =
+    const { connect, isConnecting } =
     useConnectUI();
     const { isConnected } = useIsConnected();
     const { wallet } = useWallet();

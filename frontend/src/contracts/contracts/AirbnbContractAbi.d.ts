@@ -4,9 +4,9 @@
 /* eslint-disable */
 
 /*
-  Fuels version: 0.73.0
-  Forc version: 0.49.2
-  Fuel-Core version: 0.22.0
+  Fuels version: 0.89.2
+  Forc version: 0.60.0
+  Fuel-Core version: 0.27.0
 */
 
 import type {
@@ -35,13 +35,13 @@ export enum PropertyStateOutput { Listed = 'Listed', Unlisted = 'Unlisted' };
 export enum UserErrorInput { InvalidID = 'InvalidID', UnauthorizedUser = 'UnauthorizedUser', PropertyNotAvailable = 'PropertyNotAvailable' };
 export enum UserErrorOutput { InvalidID = 'InvalidID', UnauthorizedUser = 'UnauthorizedUser', PropertyNotAvailable = 'PropertyNotAvailable' };
 
-export type AddressInput = { value: string };
+export type AddressInput = { bits: string };
 export type AddressOutput = AddressInput;
 export type BookingInfoInput = { bookedBy: IdentityInput, bookingFrom: BigNumberish, bookingTo: BigNumberish, status: BookingStateInput, property_id: BigNumberish };
 export type BookingInfoOutput = { bookedBy: IdentityOutput, bookingFrom: BN, bookingTo: BN, status: BookingStateOutput, property_id: BN };
 export type BookingSuccessfulInput = { booking_id: BigNumberish, bookedBy: IdentityInput, bookingFrom: BigNumberish, bookingTo: BigNumberish };
 export type BookingSuccessfulOutput = { booking_id: BN, bookedBy: IdentityOutput, bookingFrom: BN, bookingTo: BN };
-export type ContractIdInput = { value: string };
+export type ContractIdInput = { bits: string };
 export type ContractIdOutput = ContractIdInput;
 export type PropertyImageInput = { image1: string, image2: string };
 export type PropertyImageOutput = PropertyImageInput;

@@ -12,9 +12,7 @@ import { PropertyDetailsPage } from "./pages/PropertyDetailsPage";
 import { ProfilePage } from "./pages/ProfilePage";
 import { ContractProvider } from "./context/ContractContext";
 
-// REPLACE WITH YOUR CONTRACT ID
-const CONTRACT_ID =
-  "0x7a94158b0472226c7b2613c81ad53bca961fa2db120d7ca07502d4e307fe27c5";
+const CONTRACT_ID = import.meta.env.VITE_CONTRACT_ADDRESS;
 
 export default function App() {
   const [contract, setContract] = useState<AirbnbContract>();
